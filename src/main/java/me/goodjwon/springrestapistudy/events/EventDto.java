@@ -1,17 +1,18 @@
 package me.goodjwon.springrestapistudy.events;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Builder @NoArgsConstructor @AllArgsConstructor
-@Setter @Getter @EqualsAndHashCode(of = "id")
-@Entity
-public class Event {
+/**
+ * 입력받아야 하는 값만 따로 정의
+ */
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class EventDto {
 
-    @Id @GeneratedValue
-    private Integer id;
     private String name;
     private String description;
     private LocalDateTime beginEnrollmentDateTime;
@@ -22,9 +23,4 @@ public class Event {
     private int basePrice;
     private int maxPrice; // (optional)
     private int limitOfEnrollment;
-    private boolean offline;
-    private boolean free;
-
-    @Enumerated(EnumType.STRING)
-    private EventStatus eventStatus = EventStatus.DRAFT;    //초기값 설정.
 }
