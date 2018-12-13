@@ -77,7 +77,7 @@ public class EventControllerTest {
 
 
     @Test
-    public void 이벤트를생성한다_에러발생_잘못된요청() throws Exception {
+    public void 이벤트를생성한다_잘못된요청_BadRequest_반환() throws Exception {
         Event event = Event.builder()
                 .id(100)
                 .name("Spring")
@@ -101,6 +101,17 @@ public class EventControllerTest {
                 .andExpect(status().isBadRequest()) // 400
 
         ;
+
+    }
+
+    @Test
+    public void 이벤트를_생성한다_빈값요청_isBadRequest_반환() throws Exception {
+        EventDto eventDto = EventDto.builder().build();
+
+        this.mockMvc.perform(post("/api/events")
+        .contentType(MediaType.APPLICATION_JSON_UTF8)
+        .content(objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isBadRequest());
 
     }
 }
