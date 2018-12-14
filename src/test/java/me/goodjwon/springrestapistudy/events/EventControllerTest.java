@@ -77,7 +77,7 @@ public class EventControllerTest {
 
 
     @Test
-    public void 이벤트를생성한다_잘못된요청_BadRequest_반환() throws Exception {
+    public void 이벤트를생성한다_요청할수_없는_항목으로인한_잘못된요청_BadRequest_반환() throws Exception {
         Event event = Event.builder()
                 .id(100)
                 .name("Spring")
@@ -111,6 +111,28 @@ public class EventControllerTest {
         this.mockMvc.perform(post("/api/events")
         .contentType(MediaType.APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    public void 이벤트를_생성한다_잘봇된_값으로_요청_isBadRequest_반환() throws Exception {
+        EventDto eventDto = EventDto.builder()
+                .name("Spring")
+                .description("REST API Development with Spring")
+                .beginEnrollmentDateTime(LocalDateTime.of(2018, 11, 23, 14, 21))
+                .closeEnrollmentDateTime(LocalDateTime.of(2018, 11, 20, 14, 21))
+                .beginEventDateTime(LocalDateTime.of(2018, 11, 25, 14, 21))
+                .endEventDateTime(LocalDateTime.of(2018, 11, 23, 14, 21))
+                .basePrice(100)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("강남역 D2 스타텁 팩토리")
+                .build();
+
+        this.mockMvc.perform(post("/api/events")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString(eventDto)))
                 .andExpect(status().isBadRequest());
 
     }
