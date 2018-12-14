@@ -2,6 +2,7 @@ package me.goodjwon.springrestapistudy.events;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.goodjwon.springrestapistudy.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +44,7 @@ public class EventControllerTest {
     ObjectMapper objectMapper;
 
     @Test
+    @TestDescription("이벤트를 생성한다.")
     public void 이벤트를생성한다() throws Exception {
         EventDto event = EventDto.builder()
                 .name("Spring")
@@ -77,6 +79,7 @@ public class EventControllerTest {
 
 
     @Test
+    @TestDescription("이벤트를생성한다. 요청할수_없는 항목으로인한 잘못된요청. BadRequest 반환")
     public void 이벤트를생성한다_요청할수_없는_항목으로인한_잘못된요청_BadRequest_반환() throws Exception {
         Event event = Event.builder()
                 .id(100)
@@ -105,6 +108,7 @@ public class EventControllerTest {
     }
 
     @Test
+    @TestDescription("이벤트를 생성한다. 빈값요청 isBadRequest 반환 400")
     public void 이벤트를_생성한다_빈값요청_isBadRequest_반환() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
@@ -116,6 +120,7 @@ public class EventControllerTest {
     }
 
     @Test
+    @TestDescription("이벤트를 생성한다 잘봇된 값으로 요청 isBadRequest 400 반환")
     public void 이벤트를_생성한다_잘봇된_값으로_요청_isBadRequest_반환() throws Exception {
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
