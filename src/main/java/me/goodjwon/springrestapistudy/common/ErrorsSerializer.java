@@ -17,6 +17,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
 
         errors.getFieldErrors().stream().forEach(e->{
             try {
+                generator.writeStartObject();
                 generator.writeStringField("field", e.getField());
                 generator.writeStringField("objectName", e.getObjectName());
                 generator.writeStringField("code", e.getCode());
@@ -25,6 +26,7 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
                 if(rejectValue!=null){
                     generator.writeStringField("rejectValue",rejectValue.toString());
                 }
+                generator.writeEndObject();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -33,10 +35,11 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
 
         errors.getGlobalErrors().stream().forEach(e->{
             try {
+                generator.writeStartObject();
                 generator.writeStringField("objectName", e.getObjectName());
                 generator.writeStringField("code", e.getCode());
                 generator.writeStringField("defaultMessage", e.getDefaultMessage());
-
+                generator.writeEndObject();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
