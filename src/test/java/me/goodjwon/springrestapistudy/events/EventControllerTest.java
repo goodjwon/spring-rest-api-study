@@ -69,11 +69,9 @@ public class EventControllerTest {
                 .andExpect(header().exists(HttpHeaders.LOCATION))
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("id").value(Matchers.not(100)))     //100이 되면 테스트 실패
-                .andExpect(jsonPath("free").value(Matchers.not(true)))  //true이 되면 테스트 실패
-                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
-
-
-        ;
+                .andExpect(jsonPath("free").value(false))  //true이 되면 테스트 실패
+                .andExpect(jsonPath("offline").value(true))  //true이 되면 테스트 실패
+                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()));
 
     }
 

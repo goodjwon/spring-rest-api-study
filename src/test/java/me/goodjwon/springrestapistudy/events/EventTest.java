@@ -30,4 +30,58 @@ public class EventTest {
 
     }
 
+    @Test
+    public void 유료인지_무료인지_테스트(){
+        //Given
+        Event event = Event.builder()
+                .basePrice(0)
+                .maxPrice(0)
+                .build();
+
+        //When
+        event.update();
+
+        //Then
+        assertThat(event.isFree()).isFalse();
+
+        //Given
+        event = Event.builder()
+                .basePrice(100)
+                .maxPrice(0)
+                .build();
+        //Wen
+        event.update();
+
+        //Then
+        assertThat(event.isFree()).isFalse();
+    }
+
+    @Test
+    public void 온라인인지_오프라인인지_테스트(){
+        //Given
+        Event event = Event.builder()
+                .location("강남역 네이버 D2")
+                .build();
+
+        //When
+        event.update();
+
+        //Then
+        assertThat(event.isOffline()).isTrue();
+
+
+        //Given
+        event = Event.builder()
+                .build();
+
+        //When
+        event.update();
+
+        //Then
+        assertThat(event.isOffline()).isFalse();
+
+    }
+
+
+
 }
