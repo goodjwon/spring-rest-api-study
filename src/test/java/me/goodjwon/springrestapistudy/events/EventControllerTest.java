@@ -71,7 +71,12 @@ public class EventControllerTest {
                 .andExpect(jsonPath("id").value(Matchers.not(100)))     //100이 되면 테스트 실패
                 .andExpect(jsonPath("free").value(false))  //true이 되면 테스트 실패
                 .andExpect(jsonPath("offline").value(true))  //true이 되면 테스트 실패
-                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()));
+                .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.query-events").exists())
+                .andExpect(jsonPath("_links.update-event").exists())
+
+        ;
 
     }
 
