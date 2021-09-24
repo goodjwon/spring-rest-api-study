@@ -12,8 +12,12 @@ public class EventTest {
 
     @Test
     public void 빌더가있는지_확인(){
-        Event event = Event.builder().build();
+        Event event = Event.builder()
+                .name("")
+                .description("")
+                .build();
         assertThat(event).isNotNull();
+
     }
 
     @Test

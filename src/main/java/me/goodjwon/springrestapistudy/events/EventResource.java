@@ -2,8 +2,8 @@ package me.goodjwon.springrestapistudy.events;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.*;
+
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 

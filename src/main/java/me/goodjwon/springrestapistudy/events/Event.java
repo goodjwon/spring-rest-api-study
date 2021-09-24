@@ -1,12 +1,13 @@
 package me.goodjwon.springrestapistudy.events;
 
 import lombok.*;
+import me.goodjwon.springrestapistudy.accounts.Account;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder @NoArgsConstructor @AllArgsConstructor
-@Setter @Getter @EqualsAndHashCode(of = "id")
+@Setter @Getter @EqualsAndHashCode(of = {"id"}) //상호참조로 인한 stacoverflow 발생차단.
 @Entity
 public class Event {
 
@@ -27,6 +28,8 @@ public class Event {
 
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;    //초기값 설정.
+    @ManyToOne
+    private Account manager;
 
     public void update() {
         //update Free
